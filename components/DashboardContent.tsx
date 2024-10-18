@@ -6,19 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Check } from 'lucide-react'
 import { Label } from './ui/label'
 
-export const DashboardContent = ({ filteredBlogs, handleReadMore, isPreferredContent, togglePreferredContent }) => (
+export const DashboardContent = ({ filteredBlogs, handleReadMore}) => (
   <div>
-    <div className="flex justify-between items-center mb-6">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
-      <div className="flex items-center space-x-2">
-        <Switch
-          id="preferred-content"
-          checked={isPreferredContent}
-          onCheckedChange={togglePreferredContent}
-        />
-        <Label htmlFor="preferred-content">Preferred Content</Label>
-      </div>
-    </div>
+    <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
     <Tabs defaultValue="recent">
       <TabsList>
         <TabsTrigger value="recent">Recent</TabsTrigger>

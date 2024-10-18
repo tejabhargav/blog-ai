@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from "@/components/ui/button"
 import { Home, BookOpen, Upload, Sliders } from 'lucide-react'
 import { FilterDropdown } from './FilterDropdown'
+import { H1 } from "./ui/typography"
 
 type FilterType = 'contentType' | 'resourceType' | 'keywords' | 'website' | 'pdf' | 'youtube' | 'docs'
 
@@ -30,63 +31,65 @@ export const Sidebar: React.FC<SidebarProps> = ({
   docsFilter,
   handleFilterChange
 }) => {
-  const showWebsiteFilter = resourceTypeFilter.includes('website');
-  const showPDFFilter = resourceTypeFilter.includes('pdf');
-  const showYouTubeFilter = resourceTypeFilter.includes('youtube');
-  const showDocsFilter = resourceTypeFilter.includes('docs');
+  const showWebsiteFilter = resourceTypeFilter.includes('Website');
+  const showPDFFilter = resourceTypeFilter.includes('PDF');
+  const showYouTubeFilter = resourceTypeFilter.includes('YouTube');
+  const showDocsFilter = resourceTypeFilter.includes('Docs');
 
   return (
-    <aside className="w-64 border-r">
+    <aside className="w-64 border-r h-screen overflow-y-auto flex flex-col">
       <div className="p-4">
-        <h1 className="text-2xl font-bold">BlogAI</h1>
+          <H1 className="cursor-pointer" onClick={() => setActiveTab('dashboard')}>
+            BlogAI
+          </H1>
       </div>
-      <nav className="mt-6 flex-grow space-y-2">
+      <nav className="mt-8 flex-grow space-y-6 px-4 mb-8">
         <Button
           variant={activeTab === 'dashboard' ? 'secondary' : 'ghost'}
-          className="w-full justify-start text-lg py-3"
+          className="w-full justify-start text-lg py-3 font-semibold"
           onClick={() => setActiveTab('dashboard')}
         >
-          <Home className="mr-2 h-5 w-5" />
+          <Home className="mr-3 h-5 w-5" />
           Dashboard
         </Button>
         <Button
           variant={activeTab === 'my-blogs' ? 'secondary' : 'ghost'}
-          className="w-full justify-start text-lg py-3"
+          className="w-full justify-start text-lg py-4 font-semibold"
           onClick={() => setActiveTab('my-blogs')}
         >
-          <BookOpen className="mr-2 h-5 w-5" />
+          <BookOpen className="mr-3 h-5 w-5" />
           My Blogs
         </Button>
         <Button
           variant={activeTab === 'resources' ? 'secondary' : 'ghost'}
-          className="w-full justify-start text-lg py-3"
+          className="w-full justify-start text-lg py-4 font-semibold"
           onClick={() => setActiveTab('resources')}
         >
-          <Upload className="mr-2 h-5 w-5" />
+          <Upload className="mr-3 h-5 w-5" />
           Resources
         </Button>
         <Button
           variant={activeTab === 'preferences' ? 'secondary' : 'ghost'}
-          className="w-full justify-start text-lg py-3"
+          className="w-full justify-start text-lg py-4 font-semibold"
           onClick={() => setActiveTab('preferences')}
         >
-          <Sliders className="mr-2 h-5 w-5" />
+          <Sliders className="mr-3 h-5 w-5" />
           Preferences
         </Button>
       </nav>
-      <div className="mt-auto p-4 border-t">
+      <div className="mt-auto p-4 border-t flex-shrink-0">
         <h3 className="font-semibold mb-2">Filter Blogs</h3>
-        <div className="space-y-4">
+        <div className="space-y-4 overflow-y-auto">
           <FilterDropdown
             title="Content Type"
-            options={['technology', 'productivity', 'lifestyle']}
+            options={['Technology', 'Productivity', 'Lifestyle']}
             selected={contentTypeFilter}
             onSelect={(value) => handleFilterChange('contentType', value)}
             onRemove={(value) => handleFilterChange('contentType', value)}
           />
           <FilterDropdown
             title="Resource Type"
-            options={['website', 'pdf', 'youtube', 'docs']}
+            options={['Website', 'PDF', 'YouTube', 'Docs']}
             selected={resourceTypeFilter}
             onSelect={(value) => handleFilterChange('resourceType', value)}
             onRemove={(value) => handleFilterChange('resourceType', value)}

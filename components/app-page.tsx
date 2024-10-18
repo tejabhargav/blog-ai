@@ -31,13 +31,20 @@ export function AppPage() {
   })
 
   const togglePreferredContent = () => {
-    setIsPreferredContent(!isPreferredContent)
-    if (!isPreferredContent) {
-      // Load preferred content settings
-      setContentTypeFilter(preferredContentSettings.contentType)
-      setResourceTypeFilter(preferredContentSettings.resourceType)
-      setKeywordsFilter(preferredContentSettings.keywords)
-    }
+    setIsPreferredContent((prev) => {
+      if (!prev) {
+        // Load preferred content settings
+        setContentTypeFilter(preferredContentSettings.contentType)
+        setResourceTypeFilter(preferredContentSettings.resourceType)
+        setKeywordsFilter(preferredContentSettings.keywords)
+      } else {
+        // Reset filters when switching to all content
+        setContentTypeFilter([])
+        setResourceTypeFilter([])
+        setKeywordsFilter([])
+      }
+      return !prev
+    })
   }
 
   const handleFilterChange = (filterType: FilterType, value: string) => {
@@ -96,14 +103,14 @@ export function AppPage() {
           setIsLoggedIn={setIsLoggedIn}
           showSignUp={showSignUp}
           setShowSignUp={setShowSignUp}
+          isPreferredContent={isPreferredContent}
+          togglePreferredContent={togglePreferredContent}
         />
         <div className="p-6">
           {activeTab === 'dashboard' && (
             <DashboardContent
               filteredBlogs={filteredBlogs}
               handleReadMore={handleReadMore}
-              isPreferredContent={isPreferredContent}
-              togglePreferredContent={togglePreferredContent}
             />
           )}
           {activeTab === 'my-blogs' && (

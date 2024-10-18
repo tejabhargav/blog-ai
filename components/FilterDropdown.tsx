@@ -32,18 +32,18 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({ title, options, 
 
   return (
     <div className="space-y-2">
-      <Label>{title}</Label>
+      <Label className="text-base font-medium">{title}</Label>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="w-full justify-start">
-            {title} <ChevronDown className="ml-auto h-4 w-4" />
+          <Button variant="outline" className="w-full justify-start text-sm">
+            Select {title.toLowerCase()} <ChevronDown className="ml-auto h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <Command>
-            <CommandInput placeholder={`Search ${title.toLowerCase()}...`} />
+            <CommandInput placeholder={`Search ${title.toLowerCase()}...`} className="text-sm" />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty className="text-sm">No results found.</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => (
                   <CommandItem
@@ -65,9 +65,9 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({ title, options, 
                       />
                       <label
                         htmlFor={`checkbox-${option}`}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow"
+                        className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex-grow"
                       >
-                        {option.charAt(0).toUpperCase() + option.slice(1)}
+                        {option}
                       </label>
                     </div>
                   </CommandItem>
@@ -79,8 +79,8 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({ title, options, 
       </DropdownMenu>
       <div className="flex flex-wrap gap-2 mt-2">
         {selected.map((item) => (
-          <Badge key={item} variant="secondary" className="text-sm">
-            {item.charAt(0).toUpperCase() + item.slice(1)}
+          <Badge key={item} variant="secondary" className="text-xs">
+            {item}
             <Button
               variant="ghost"
               size="sm"

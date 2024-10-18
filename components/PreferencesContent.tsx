@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 import { FilterDropdown } from "./FilterDropdown"
 
-const contentTypeOptions = ['technology', 'productivity', 'lifestyle']
-const resourceTypeOptions = ['website', 'pdf', 'youtube', 'docs']
+const contentTypeOptions = ['Technology', 'Productivity', 'Lifestyle']
+const resourceTypeOptions = ['Website', 'PDF', 'YouTube', 'Docs']
 const keywordsOptions = ['AI', 'Machine Learning', 'Web Development', 'Data Science']
 const websiteOptions = ['Medium', 'Dev.to', 'Hashnode']
 const pdfOptions = ['Research Papers', 'E-books', 'Whitepapers']
@@ -26,7 +26,7 @@ export function PreferencesContent() {
   const [showAIGenerated, setShowAIGenerated] = useState(false)
   const [autoSaveDrafts, setAutoSaveDrafts] = useState(false)
   const [receiveNotifications, setReceiveNotifications] = useState(false)
-  const [keywordRelevance, setKeywordRelevance] = useState(50)
+  // const [keywordRelevance, setKeywordRelevance] = useState(50)
   const { toast } = useToast()
 
   const handleFilterChange = (filterType: string, value: string) => {
@@ -57,7 +57,7 @@ export function PreferencesContent() {
       showAIGenerated,
       autoSaveDrafts,
       receiveNotifications,
-      keywordRelevance,
+      // keywordRelevance,
     }
     console.log('Saving preferences:', preferences)
     toast({
@@ -96,7 +96,7 @@ export function PreferencesContent() {
             selected={websiteFilter}
             onSelect={(value) => handleFilterChange('website', value)}
             onRemove={(value) => handleFilterChange('website', value)}
-            visible={resourceTypeFilter.includes('website')}
+            visible={resourceTypeFilter.includes('Website')}
           />
           <FilterDropdown
             title="PDF"
@@ -104,7 +104,7 @@ export function PreferencesContent() {
             selected={pdfFilter}
             onSelect={(value) => handleFilterChange('pdf', value)}
             onRemove={(value) => handleFilterChange('pdf', value)}
-            visible={resourceTypeFilter.includes('pdf')}
+            visible={resourceTypeFilter.includes('PDF')}
           />
           <FilterDropdown
             title="YouTube"
@@ -112,7 +112,7 @@ export function PreferencesContent() {
             selected={youtubeFilter}
             onSelect={(value) => handleFilterChange('youtube', value)}
             onRemove={(value) => handleFilterChange('youtube', value)}
-            visible={resourceTypeFilter.includes('youtube')}
+            visible={resourceTypeFilter.includes('YouTube')}
           />
           <FilterDropdown
             title="Docs"
@@ -120,7 +120,7 @@ export function PreferencesContent() {
             selected={docsFilter}
             onSelect={(value) => handleFilterChange('docs', value)}
             onRemove={(value) => handleFilterChange('docs', value)}
-            visible={resourceTypeFilter.includes('docs')}
+            visible={resourceTypeFilter.includes('Docs')}
           />
           <FilterDropdown
             title="Keywords"
@@ -129,7 +129,7 @@ export function PreferencesContent() {
             onSelect={(value) => handleFilterChange('keywords', value)}
             onRemove={(value) => handleFilterChange('keywords', value)}
           />
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label htmlFor="keyword-relevance">Keyword Relevance</Label>
             <Slider
               id="keyword-relevance"
@@ -138,7 +138,7 @@ export function PreferencesContent() {
               onValueChange={(value) => setKeywordRelevance(value[0])}
               step={1}
             />
-          </div>
+          </div> */}
         </CardContent>
       </Card>
 
