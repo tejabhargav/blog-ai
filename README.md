@@ -6,7 +6,7 @@ BlogAI is a sophisticated blog management and content curation platform with AI-
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/blogai.git
+   https://github.com/tejabhargav/blog-ai.git
    cd blogai
    ```
 
