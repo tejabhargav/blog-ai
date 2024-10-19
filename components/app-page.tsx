@@ -97,7 +97,7 @@ export function AppPage() {
         docsFilter={docsFilter}
         handleFilterChange={handleFilterChange}
       />
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1">
         <TopNavigation
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
