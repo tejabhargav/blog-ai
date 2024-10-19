@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Check } from 'lucide-react'
 import { Label } from './ui/label'
 
-export const DashboardContent = ({ filteredBlogs, handleReadMore}) => (
+export const DashboardContent = ({ filteredBlogs, handleReadMore }) => (
   <div>
     <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
     <Tabs defaultValue="recent">
@@ -31,7 +31,7 @@ export const DashboardContent = ({ filteredBlogs, handleReadMore}) => (
       </TabsContent>
       <TabsContent value="ai-generated" className="mt-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredBlogs.filter(blog => blog.category === 'ai-generated').map(blog => (
+          {filteredBlogs.filter(blog => blog.isAIGenerated).map(blog => (
             <BlogCard key={blog.id} blog={blog} onReadMore={handleReadMore} />
           ))}
         </div>

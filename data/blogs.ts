@@ -7,6 +7,11 @@ export type Blog = {
   category: string
   resourceType: string
   contentType: string
+  isAIGenerated?: boolean
+  tags: string[]
+  keywords: string[]
+  source: string
+  aiSources?: string[] // Only for AI-generated blogs
 }
 
 export const blogs: Blog[] = [
@@ -18,7 +23,12 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
     category: "recent",
     resourceType: "website",
-    contentType: "technology"
+    contentType: "technology",
+    isAIGenerated: true,
+    tags: ["AI", "Content Creation", "Technology"],
+    keywords: ["artificial intelligence", "content creation", "automation", "machine learning"],
+    source: "TechCrunch",
+    aiSources: ["OpenAI GPT-3", "DALL-E 2"]
   },
   {
     id: "2",
@@ -28,7 +38,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1585076641399-5c06d1b3365f",
     category: "popular",
     resourceType: "pdf",
-    contentType: "productivity"
+    contentType: "productivity",
+    tags: ["Remote Work", "Productivity", "Work-Life Balance"],
+    keywords: ["remote work", "productivity tips", "home office", "time management"],
+    source: "Harvard Business Review"
   },
   {
     id: "3",
@@ -38,7 +51,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
     category: "recent",
     resourceType: "website",
-    contentType: "lifestyle"
+    contentType: "lifestyle",
+    tags: ["Sustainable Fashion", "Eco-Friendly", "Fashion Industry"],
+    keywords: ["sustainable fashion", "eco-friendly practices", "fashion industry", "consumers"],
+    source: "The Guardian"
   },
   {
     id: "4",
@@ -48,7 +64,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0",
     category: "popular",
     resourceType: "website",
-    contentType: "technology"
+    contentType: "technology",
+    tags: ["Blockchain", "Cryptocurrency", "Supply Chain Management"],
+    keywords: ["blockchain technology", "cryptocurrency", "supply chain management", "healthcare"],
+    source: "Coindesk"
   },
   {
     id: "6",
@@ -58,7 +77,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
     category: "popular",
     resourceType: "website",
-    contentType: "technology"
+    contentType: "technology",
+    tags: ["5G", "IoT", "Smart Cities"],
+    keywords: ["5G networks", "IoT applications", "smart cities", "autonomous vehicles"],
+    source: "The Verge"
   },
   {
     id: "7",
@@ -68,7 +90,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2",
     category: "recent",
     resourceType: "pdf",
-    contentType: "productivity"
+    contentType: "productivity",
+    tags: ["Public Speaking", "Communication", "Confidence"],
+    keywords: ["public speaking", "communication skills", "confidence building", "presentations"],
+    source: "TED Talks"
   },
   {
     id: "8",
@@ -78,7 +103,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55",
     category: "popular",
     resourceType: "website",
-    contentType: "lifestyle"
+    contentType: "lifestyle",
+    tags: ["Sleep", "Sleep Cycles", "Sleep Hygiene"],
+    keywords: ["sleep science", "sleep cycles", "sleep hygiene", "cognitive function"],
+    source: "National Sleep Foundation"
   },
   {
     id: "9",
@@ -88,7 +116,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d",
     category: "recent",
     resourceType: "website",
-    contentType: "technology"
+    contentType: "technology",
+    tags: ["Machine Learning", "Healthcare", "Diagnosis"],
+    keywords: ["machine learning", "healthcare", "diagnosis", "treatment"],
+    source: "Healthcare IT News"
   },
   {
     id: "10",
@@ -98,7 +129,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173",
     category: "popular",
     resourceType: "pdf",
-    contentType: "productivity"
+    contentType: "productivity",
+    tags: ["Time Management", "Productivity", "Work-Life Balance"],
+    keywords: ["time management", "productivity", "work-life balance", "Pomodoro Technique"],
+    source: "Forbes"
   },
   {
     id: "11",
@@ -108,7 +142,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09",
     category: "recent",
     resourceType: "website",
-    contentType: "lifestyle"
+    contentType: "lifestyle",
+    tags: ["Sustainable Living", "Environmental Footprint", "Eco-Friendly"],
+    keywords: ["sustainable living", "environmental footprint", "eco-friendly", "reduce waste"],
+    source: "The New York Times"
   },
   {
     id: "12",
@@ -118,7 +155,12 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
     category: "popular",
     resourceType: "website",
-    contentType: "technology"
+    contentType: "technology",
+    isAIGenerated: true,
+    tags: ["AI", "Automation", "Future of Work"],
+    keywords: ["artificial intelligence", "automation", "future of work", "job market"],
+    source: "Harvard Business Review",
+    aiSources: ["OpenAI GPT-3", "DALL-E 2"]
   },
   {
     id: "13",
@@ -128,7 +170,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
     category: "recent",
     resourceType: "pdf",
-    contentType: "productivity"
+    contentType: "productivity",
+    tags: ["Habit Formation", "Positive Habits", "Goal Achievement"],
+    keywords: ["habit formation", "positive habits", "goal achievement", "habit loop"],
+    source: "Psychology Today"
   },
   {
     id: "14",
@@ -138,7 +183,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3",
     category: "popular",
     resourceType: "website",
-    contentType: "technology"
+    contentType: "technology",
+    tags: ["Cybersecurity", "Remote Work", "Data Protection"],
+    keywords: ["cybersecurity", "remote work", "data protection", "phishing"],
+    source: "Cybersecurity News"
   },
   {
     id: "15",
@@ -148,7 +196,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352",
     category: "recent",
     resourceType: "website",
-    contentType: "lifestyle"
+    contentType: "lifestyle",
+    tags: ["Mindful Eating", "Healthy Eating", "Mental Health"],
+    keywords: ["mindful eating", "healthy eating", "mental health", "food choices"],
+    source: "Mindful Magazine"
   },
   {
     id: "16",
@@ -158,7 +209,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
     category: "popular",
     resourceType: "website",
-    contentType: "technology"
+    contentType: "technology",
+    tags: ["No-Code Development", "Software Development", "Democratization"],
+    keywords: ["no-code development", "software development", "democratization", "complex applications"],
+    source: "Forbes"
   },
   {
     id: "17",
@@ -168,7 +222,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
     category: "recent",
     resourceType: "pdf",
-    contentType: "productivity"
+    contentType: "productivity",
+    tags: ["Deep Work", "Productivity", "Creativity"],
+    keywords: ["deep work", "productivity", "creativity", "focus"],
+    source: "Harvard Business Review"
   },
   {
     id: "18",
@@ -178,7 +235,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7",
     category: "popular",
     resourceType: "website",
-    contentType: "technology"
+    contentType: "technology",
+    tags: ["Renewable Energy", "Sustainable Energy", "Innovation"],
+    keywords: ["renewable energy", "sustainable energy", "innovation", "energy future"],
+    source: "The Guardian"
   },
   {
     id: "19",
@@ -188,7 +248,10 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1507297230445-ff678f10b524",
     category: "recent",
     resourceType: "website",
-    contentType: "lifestyle"
+    contentType: "lifestyle",
+    tags: ["Digital Minimalism", "Focus", "Well-being"],
+    keywords: ["digital minimalism", "focus", "well-being", "declutter"],
+    source: "The New York Times"
   },
   {
     id: "20",
@@ -198,6 +261,11 @@ export const blogs: Blog[] = [
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
     category: "popular",
     resourceType: "pdf",
-    contentType: "technology"
+    contentType: "technology",
+    isAIGenerated: true,
+    tags: ["AI", "Ethics", "Technology"],
+    keywords: ["artificial intelligence", "ethics", "moral implications", "AI development"],
+    source: "MIT Technology Review",
+    aiSources: ["OpenAI GPT-3", "IBM Watson"]
   }
 ]

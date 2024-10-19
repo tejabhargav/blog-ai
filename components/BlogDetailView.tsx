@@ -2,7 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Facebook, Twitter, Linkedin, Share2 } from 'lucide-react'
+import { Facebook, Twitter, Linkedin, Share2, Wand2 } from 'lucide-react'
+import { Badge } from "@/components/ui/badge"
 
 type Blog = {
   id: string
@@ -13,6 +14,10 @@ type Blog = {
   category: string
   resourceType: string
   contentType: string
+  isAIGenerated?: boolean
+  tags?: string[]
+  source: string
+  aiSources?: string[]
 }
 
 interface BlogDetailViewProps {
@@ -28,9 +33,31 @@ export const BlogDetailView: React.FC<BlogDetailViewProps> = ({ blog, onClose })
       </CardHeader>
       <CardContent className="p-6">
         <CardTitle className="text-3xl mb-4">{blog.title}</CardTitle>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {blog.tags?.map((tag, index) => (
+            <Badge key={index} variant="secondary">{tag}</Badge>
+          ))}
+        </div>
         <p className="text-muted-foreground mb-4">{blog.summary}</p>
-        <div className="prose max-w-none">
+        <div className="prose max-w-none mb-4">
           {blog.content}
+        </div>
+        <div className="text-sm text-muted-foreground">
+          <p>Source: {blog.source}</p>
+          <p>Resource Type: {blog.resourceType}</p>
+          {blog.isAIGenerated && blog.aiSources && (
+            <div className="mt-2">
+              <p className="font-semibold flex items-center">
+                <Wand2 className="h-4 w-4 mr-1" />
+                AI Sources:
+              </p>
+              <ul className="list-disc list-inside">
+                {blog.aiSources.map((source, index) => (
+                  <li key={index}>{source}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between p-6">

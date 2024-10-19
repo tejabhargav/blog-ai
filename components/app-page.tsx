@@ -67,11 +67,25 @@ export function AppPage() {
     })
   }
 
+  const clearAllFilters = () => {
+    setContentTypeFilter([])
+    setResourceTypeFilter([])
+    setKeywordsFilter([])
+    setWebsiteFilter([])
+    setPdfFilter([])
+    setYoutubeFilter([])
+    setDocsFilter([])
+  }
+
   useEffect(() => {
     const filtered = blogs.filter(blog => 
       (contentTypeFilter.length === 0 || contentTypeFilter.includes(blog.contentType)) &&
       (resourceTypeFilter.length === 0 || resourceTypeFilter.includes(blog.resourceType)) &&
-      (keywordsFilter.length === 0 || keywordsFilter.some(keyword => blog.keywords.includes(keyword)))
+      (keywordsFilter.length === 0 || keywordsFilter.some(keyword => blog.keywords.includes(keyword))) &&
+      (websiteFilter.length === 0 || websiteFilter.includes(blog.website)) &&
+      (pdfFilter.length === 0 || pdfFilter.includes(blog.pdf)) &&
+      (youtubeFilter.length === 0 || youtubeFilter.includes(blog.youtube)) &&
+      (docsFilter.length === 0 || docsFilter.includes(blog.docs))
     )
     setFilteredBlogs(filtered)
   }, [contentTypeFilter, resourceTypeFilter, keywordsFilter, websiteFilter, pdfFilter, youtubeFilter, docsFilter])
@@ -84,20 +98,23 @@ export function AppPage() {
   }
 
   return (
-    <div className="flex h-screen bg-background">
-      <Sidebar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        contentTypeFilter={contentTypeFilter}
-        resourceTypeFilter={resourceTypeFilter}
-        keywordsFilter={keywordsFilter}
-        websiteFilter={websiteFilter}
-        pdfFilter={pdfFilter}
-        youtubeFilter={youtubeFilter}
-        docsFilter={docsFilter}
-        handleFilterChange={handleFilterChange}
-      />
-      <main className="flex-1">
+    <div className="flex h-screen bg-background overflow-hidden">
+      <div className="fixed top-0 left-0 h-full">
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          contentTypeFilter={contentTypeFilter}
+          resourceTypeFilter={resourceTypeFilter}
+          keywordsFilter={keywordsFilter}
+          websiteFilter={websiteFilter}
+          pdfFilter={pdfFilter}
+          youtubeFilter={youtubeFilter}
+          docsFilter={docsFilter}
+          handleFilterChange={handleFilterChange}
+          clearAllFilters={clearAllFilters}
+        />
+      </div>
+      <div className="flex-1 ml-64 flex flex-col"> {/* Adjust ml-64 based on your sidebar width */}
         <TopNavigation
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
@@ -106,7 +123,7 @@ export function AppPage() {
           isPreferredContent={isPreferredContent}
           togglePreferredContent={togglePreferredContent}
         />
-        <div className="p-6">
+        <main className="flex-1 overflow-y-auto p-6">
           {activeTab === 'dashboard' && (
             <DashboardContent
               filteredBlogs={filteredBlogs}
@@ -121,8 +138,8 @@ export function AppPage() {
           )}
           {activeTab === 'resources' && <ResourcesContent />}
           {activeTab === 'preferences' && <PreferencesContent />}
-        </div>
-      </main>
+        </main>
+      </div>
       {selectedBlog && (
         <BlogDetailView blog={selectedBlog} onClose={() => setSelectedBlog(null)} />
       )}
