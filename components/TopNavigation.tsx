@@ -117,7 +117,7 @@ export const TopNavigation: React.FC<{
                       Enter your credentials to access your account.
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="grid gap-4 py-4">
+                  <div className="grid gap-4 py-4 ">
                     <div className="grid grid-cols-4 items-center gap-4">
                       <Label htmlFor="email" className="text-right">
                         Email

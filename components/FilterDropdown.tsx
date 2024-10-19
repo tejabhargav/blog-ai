@@ -24,15 +24,24 @@ interface FilterDropdownProps {
   selected: string[]
   onSelect: (value: string) => void
   onRemove: (value: string) => void
+  onApply: () => void
   visible?: boolean
 }
 
-export const FilterDropdown: React.FC<FilterDropdownProps> = ({ title, options, selected, onSelect, onRemove, visible = true }) => {
+export const FilterDropdown: React.FC<FilterDropdownProps> = ({ 
+  title, 
+  options, 
+  selected, 
+  onSelect, 
+  onRemove, 
+  onApply, 
+  visible = true 
+}) => {
   if (!visible) return null;
 
   return (
     <div className="space-y-2">
-      <Label className="text-base font-medium">{title}</Label>
+      <Label className="text-sm font-medium">{title}</Label>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="w-full justify-start text-sm">
@@ -75,9 +84,12 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({ title, options, 
               </CommandGroup>
             </CommandList>
           </Command>
+          <div className="p-2">
+            <Button onClick={onApply} className="w-full">Apply</Button>
+          </div>
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className="flex flex-wrap gap-2 mt-2">
+      <div className="flex flex-wrap gap-2 mt-2 pb-2">
         {selected.map((item) => (
           <Badge key={item} variant="secondary" className="text-xs">
             {item}

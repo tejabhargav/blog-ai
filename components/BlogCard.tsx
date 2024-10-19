@@ -45,7 +45,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ blog, onReadMore }) => (
         </Button>
       </div>
       <Button size="sm" onClick={() => onReadMore(blog.id)}>
-        Read More
+        Preview
       </Button>
     </CardFooter>
   </Card>

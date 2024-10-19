@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
-import { Home, BookOpen, Upload, Sliders } from 'lucide-react'
+import { Home, BookOpen, Upload, Sliders, X } from 'lucide-react'
 import { FilterDropdown } from './FilterDropdown'
-import { H1 } from "./ui/typography"
 
 type FilterType = 'contentType' | 'resourceType' | 'keywords' | 'website' | 'pdf' | 'youtube' | 'docs'
 
@@ -17,6 +16,7 @@ interface SidebarProps {
   youtubeFilter: string[]
   docsFilter: string[]
   handleFilterChange: (filterType: FilterType, value: string) => void
+  clearAllFilters: () => void  // New prop for clearing all filters
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -29,24 +29,40 @@ export const Sidebar: React.FC<SidebarProps> = ({
   pdfFilter,
   youtubeFilter,
   docsFilter,
-  handleFilterChange
+  handleFilterChange,
+  clearAllFilters  // New prop
 }) => {
   const showWebsiteFilter = resourceTypeFilter.includes('Website');
   const showPDFFilter = resourceTypeFilter.includes('PDF');
   const showYouTubeFilter = resourceTypeFilter.includes('YouTube');
   const showDocsFilter = resourceTypeFilter.includes('Docs');
 
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [appliedCategories, setAppliedCategories] = useState<string[]>([]);
+  const [appliedTags, setAppliedTags] = useState<string[]>([]);
+
+  const handleApplyCategories = () => {
+    setAppliedCategories(selectedCategories);
+    // Here you would typically trigger a filter update in your main content
+  };
+
+  const handleApplyTags = () => {
+    setAppliedTags(selectedTags);
+    // Here you would typically trigger a filter update in your main content
+  };
+
   return (
-    <aside className="w-64 border-r h-screen overflow-y-auto flex flex-col">
+    <aside className="w-64 border-r h-screen flex flex-col">
       <div className="p-4">
-          <H1 className="cursor-pointer" onClick={() => setActiveTab('dashboard')}>
-            BlogAI
-          </H1>
+        <h1 className="cursor-pointer text-4xl font-extrabold" onClick={() => setActiveTab('dashboard')}>
+          BlogAI
+        </h1>
       </div>
-      <nav className="mt-8 flex-grow space-y-6 px-4 mb-8">
+      <nav className="mt-8 flex-grow space-y-2 px-4 mb-8  ">
         <Button
           variant={activeTab === 'dashboard' ? 'secondary' : 'ghost'}
-          className="w-full justify-start text-lg py-3 font-semibold"
+          className="w-full justify-start text-sm py-4 font-semibold"
           onClick={() => setActiveTab('dashboard')}
         >
           <Home className="mr-3 h-5 w-5" />
@@ -54,7 +70,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </Button>
         <Button
           variant={activeTab === 'my-blogs' ? 'secondary' : 'ghost'}
-          className="w-full justify-start text-lg py-4 font-semibold"
+          className="w-full justify-start text-sm py-4 font-semibold"
           onClick={() => setActiveTab('my-blogs')}
         >
           <BookOpen className="mr-3 h-5 w-5" />
@@ -62,7 +78,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </Button>
         <Button
           variant={activeTab === 'resources' ? 'secondary' : 'ghost'}
-          className="w-full justify-start text-lg py-4 font-semibold"
+          className="w-full justify-start text-sm py-4 font-semibold"
           onClick={() => setActiveTab('resources')}
         >
           <Upload className="mr-3 h-5 w-5" />
@@ -70,22 +86,34 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </Button>
         <Button
           variant={activeTab === 'preferences' ? 'secondary' : 'ghost'}
-          className="w-full justify-start text-lg py-4 font-semibold"
+          className="w-full justify-start text-sm py-4 font-semibold"
           onClick={() => setActiveTab('preferences')}
         >
           <Sliders className="mr-3 h-5 w-5" />
           Preferences
         </Button>
       </nav>
-      <div className="mt-auto p-4 border-t flex-shrink-0">
-        <h3 className="font-semibold mb-2">Filter Blogs</h3>
-        <div className="space-y-4 overflow-y-auto">
+      <div className="p-4 border-t flex-shrink-0 overflow-y-auto">
+        <div className="flex justify-between items-center mb-2">
+          <h3 className="font-semibold text-sm">Filter Blogs</h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clearAllFilters}
+            className="text-xs bg-red-500 bg-opacity-70 hover:bg-red-600 transition-all duration-300 text-white font-semibold hover:text-white ease-in-out hover:scale-105 hover:shadow-md"
+          >
+            <X className=" " />
+            Clear All
+          </Button>
+        </div>
+        <div className="space-y-0">
           <FilterDropdown
             title="Content Type"
             options={['Technology', 'Productivity', 'Lifestyle']}
             selected={contentTypeFilter}
             onSelect={(value) => handleFilterChange('contentType', value)}
             onRemove={(value) => handleFilterChange('contentType', value)}
+            onApply={() => {}} // Add this line
           />
           <FilterDropdown
             title="Resource Type"
@@ -93,6 +121,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             selected={resourceTypeFilter}
             onSelect={(value) => handleFilterChange('resourceType', value)}
             onRemove={(value) => handleFilterChange('resourceType', value)}
+            onApply={() => {}} // Add this line
           />
           <FilterDropdown
             title="Keywords"
@@ -100,6 +129,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             selected={keywordsFilter}
             onSelect={(value) => handleFilterChange('keywords', value)}
             onRemove={(value) => handleFilterChange('keywords', value)}
+            onApply={() => {}} // Add this line
           />
           <FilterDropdown
             title="Select Website"
@@ -108,6 +138,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onSelect={(value) => handleFilterChange('website', value)}
             onRemove={(value) => handleFilterChange('website', value)}
             visible={showWebsiteFilter}
+            onApply={() => {}} // Add this line
           />
           <FilterDropdown
             title="Select PDFs"
@@ -116,6 +147,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onSelect={(value) => handleFilterChange('pdf', value)}
             onRemove={(value) => handleFilterChange('pdf', value)}
             visible={showPDFFilter}
+            onApply={() => {}} // Add this line
           />
           <FilterDropdown
             title="Select YouTube Links"
@@ -124,6 +156,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onSelect={(value) => handleFilterChange('youtube', value)}
             onRemove={(value) => handleFilterChange('youtube', value)}
             visible={showYouTubeFilter}
+            onApply={() => {}} // Add this line
           />
           <FilterDropdown
             title="Select Google Docs"
@@ -132,6 +165,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onSelect={(value) => handleFilterChange('docs', value)}
             onRemove={(value) => handleFilterChange('docs', value)}
             visible={showDocsFilter}
+            onApply={() => {}} // Add this line
           />
         </div>
       </div>
